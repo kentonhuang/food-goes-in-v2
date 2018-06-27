@@ -1,0 +1,25 @@
+$color-primary: #fdd947;
+$color-grey-dark-1: #444444;
+$color-grey-dark-2: #252525;
+$color-grey-light-1: #d5d5d3;
+$color-black: #000;
+$color-white: #fff;
+
+$font-primary: 'Lato', sans-serif;
+
+*, *::before, *::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 62.5%; // 1rem = 10px
+}
+
+body {
+	font-family: $font-primary;
+	color: $color-grey-dark-2;
+	font-weight: 400;
+}
