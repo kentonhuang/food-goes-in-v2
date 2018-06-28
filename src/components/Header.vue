@@ -31,6 +31,7 @@ export default {
 		padding: 1.5rem 3rem;
 		display: flex;
 		justify-content: space-between;
+		border-bottom: 1px solid $color-grey-dark-3;
 	}
 
 	.logo {
