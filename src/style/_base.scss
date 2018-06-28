@@ -1,7 +1,11 @@
 $color-primary: #fdd947;
+$color-primary-light : #FDE06B;
+$color-primary-dark: #E3C33F;
 $color-grey-dark-1: #444444;
 $color-grey-dark-2: #252525;
 $color-grey-light-1: #d5d5d3;
+$color-grey-light-3: #eeeeee;
+$color-grey-light-2: #faf9f9;
 $color-black: #000;
 $color-white: #fff;
 
@@ -22,4 +26,7 @@ body {
 	font-family: $font-primary;
 	color: $color-grey-dark-2;
 	font-weight: 400;
+	background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
 }
+
+
