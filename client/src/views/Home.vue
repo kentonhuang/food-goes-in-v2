@@ -33,7 +33,7 @@ export default {
 	box-shadow: 0px 0px 4.7rem 0px rgba(0,0,0,0.35);
 	
 	display: grid;
-	grid-template-rows: 5rem repeat(9, [row-start] minmax(8rem, 1fr) [row-end]);
+	grid-template-rows: 5rem repeat(5, [row-start] min-content [row-end]) repeat(4, [row-start] minmax(min-content, 1fr) [row-end]);
 	grid-template-columns: repeat(8, [col-start] minmax(10rem, 1fr) [col-end]);
 
 	overflow: hidden;

@@ -30,8 +30,9 @@
 <style lang="scss">
 	.restaurant-container {
 		background-color: $color-grey-light-2;
-		grid-row: row-start 1 / row-end 5;
+		grid-row: 2 / 7;
 		grid-column: col-start 1 / col-end 3;
+		border-bottom: 1px solid #ccc;
 
 		display: grid;
 		grid-template-columns: 5rem repeat(2, 1fr) 5rem;
@@ -50,6 +51,7 @@
 		border-right: 1px solid $color-grey-light-3;
 		color: $color-secondary;
 		font-size: 1.6rem;
+		padding-bottom: 2rem;
 
 			&__img--container {
 				grid-column: 1 / -1;

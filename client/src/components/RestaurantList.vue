@@ -27,11 +27,11 @@
 <style lang="scss">
 	.restaurant-list {
 		background-color: $color-grey-light-3;
-		grid-row: row-start 6/ row-end 10;
+		grid-row: row-start 6 / row-end 10;
 		grid-column: col-start 1 / col-end 3;
 
 		display:grid;
-		grid-auto-rows: 10rem;
+		grid-auto-rows: 1fr;
 
 		overflow: auto;
 	}
