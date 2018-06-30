@@ -3,20 +3,36 @@
 		<span class="logo">foodgoes.in</span>
 		<form class="form">
 			<label for="find" class="form__input__label"><span class="form__input__label--text">Find:</span></label>
-			<input type="text" class="form__input form__input--find" id="find" placeholder="food, Chinese, Tacos...">
+			<input v-model="formData.term" type="text" class="form__input form__input--find" id="find" placeholder="food, Chinese, Tacos...">
 			<label for="find" class="form__input__label"><span class="form__input__label--text">Near:</span></label>
-			<input type="text" class="form__input" id="location" placeholder="address, city, state, or zip">
-			<button type="submit">{{ headerButton }}</button>
+			<input v-model="formData.location" type="text" class="form__input" id="location" placeholder="address, city, state, or zip">
+			<button type="submit" v-on:click="findRestaurant">{{ headerButton }}</button>
 		</form>
-		<span class="right">About</span>
+		<span class="right">{{ formData.term }} {{ formData.location }}</span>
 	</header>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
 	data() {
 		return {
 			headerButton: 'Find Restaurant',
+		}
+	},
+	computed: {
+		...mapState({
+			formData: state => state.formData
+		})
+	},
+	methods: {
+		updateForm(e) {
+			this.$store.commit('updateForm', e.target.value);
+		},
+		findRestaurant(e) {
+			e.preventDefault();
+			this.$store.dispatch('getRestaurant');
 		}
 	}
 }

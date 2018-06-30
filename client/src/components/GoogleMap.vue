@@ -6,16 +6,18 @@
       style="width:100%;  height: 100%;"
     >
       <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="center=m.position"
+        :key="coord.restId"
+        v-for="coord in coords"
+        :position="coord"
+        @click="markerClick(coord)"
       ></gmap-marker>
     </gmap-map>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "GoogleMap",
   data() {
@@ -27,13 +29,49 @@ export default {
       places: [],
       currentPlace: null
     };
-  },
+	},
+	
+	computed: {
+		...mapState({
+			selected: state => state.selected,
+			restaurant: (state) => state.restaurant,
+			restaurantHistory: state => state.restaurantHistory,
+			coords: (state) => {
+				return state.restaurantHistory.map(restaurant => {
+					const coordinates = restaurant.coordinates;
+					const coord = {
+						lat: coordinates.latitude,
+						lng: coordinates.longitude,
+						restaurant: restaurant,
+					}
+					return coord;
+				})
+			}
+		})
+	},
+
+	watch: {
+		restaurant() {
+			const coordinates = this.restaurant.coordinates;
+			const coord = {
+			lat: coordinates.latitude,
+			lng: coordinates.longitude,
+			}
+			this.setCenter(coord);
+		}
+	},
 
   mounted() {
-    this.geolocate();
+		this.geolocate();
   },
 
   methods: {
+		markerClick(coord) {
+			this.$store.dispatch('setRestaurant', coord.restaurant);
+		},
+		setCenter(coordinates) {
+			this.center = coordinates;
+		},
     // receives a place object via the autocomplete component
     setPlace(place) {
       this.currentPlace = place;
@@ -42,7 +80,7 @@ export default {
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
+					lng: this.currentPlace.geometry.location.lng(),
         };
         this.markers.push({ position: marker });
         this.places.push(this.currentPlace);

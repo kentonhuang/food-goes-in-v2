@@ -22,12 +22,6 @@ export default {
 		RestaurantDetail,
 		AddBar,
 	},
-	mounted: function() {
-		axios.get('/api/search2/?term=food&location=sacramento')
-			.then(res => {
-				console.log(res.data);
-			})
-	}
 }
 </script>
 

@@ -2,17 +2,17 @@
 	<div class="restaurant-container">
 		<div class="restaurant-detail">
 			<div class="restaurant-detail__img--container">
-				<img class="restaurant-detail__img--container__img" src="https://i.imgur.com/8OkJUS0.jpg" alt="Restaurant Image">
+				<img class="restaurant-detail__img--container__img" v-bind:src="restaurant.image_url" alt="Restaurant Image">
 			</div>
-			<h4 class="restaurant-detail__name">Piccolo Pete's</h4>
+			<h4 class="restaurant-detail__name">{{ restaurant.name }}</h4>
 			<div class="restaurant-detail__info-1">
-				<p>FOUR STARS</p>
-				<p>FOUR DOLLAR SIGNS</p>
-				<p>497 REVIEWS</p>
+				<p>{{ restaurant.rating }} STARS</p>
+				<p>{{ restaurant.price }}</p>
+				<p>{{ restaurant.review_count }} REVIEWS</p>
 				<p>OPEN NOW: YES</p>
 				<p>SOMETHING ELSE</p>
 				<p>SOMETHING ELSE</p>
-				<a href="#" class="btn-text margin-top-sm">Open in Yelp &rarr;</a>
+				<a v-on:click="test" :href="restaurant.url" class="btn-text margin-top-sm">Open in Yelp &rarr;</a>
 				</div>
 			<div class="restaurant-detail__info-2">
 				<p>34 Bayshore Blvd</p>
@@ -25,6 +25,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
+export default {
+	data() {
+		return {
+			restaurantFound: false
+		}
+	},
+	computed: {
+		...mapState({ 
+			restaurant: state => state.restaurant
+		}),
+		
+	},
+	methods: {
+		test () {
+			console.log(this.restaurant);
+		}
+	},
+}
 </script>
 
 <style lang="scss">
@@ -37,6 +57,7 @@
 		display: grid;
 		grid-template-columns: 5rem repeat(2, 1fr) 5rem;
 		grid-row-gap: 1.5rem;
+		transition: all .2s;
 	}
 
 	.restaurant-detail {

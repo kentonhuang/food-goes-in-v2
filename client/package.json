@@ -20,9 +20,6 @@
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.16"
   },
-  "proxy": {
-    "/api/": "http://localhost:3001"
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
