@@ -21,9 +21,7 @@
     "vue-template-compiler": "^2.5.16"
   },
   "proxy": {
-    "/api/": {
-      "target": "http://localhost:3001"
-    }
+    "/api/": "http://localhost:3001"
   },
   "postcss": {
     "plugins": {

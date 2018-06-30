@@ -47,17 +47,17 @@ app.get('/api/search', (req, res) => {
 app.get('/api/search2', (req, res) => {
 	let term = req.query.term;
 	let location = req.query.location
-	let price = req.query.price;
-	let open_now = req.query.open_now;
-	let distance = req.query.distance;
+	//let price = req.query.price;
+	//let open_now = req.query.open_now;
+	//let distance = req.query.distance;
 
 	client.search({
 		term,
 		location,
 		limit: 50,
-		price,
-		open_now,
-		radius: distance,
+		//price,
+		//open_now,
+		//radius: distance,
 	}).then(response => {
 		res.json(response.jsonBody);
 	})

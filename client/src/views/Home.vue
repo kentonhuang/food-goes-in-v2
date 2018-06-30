@@ -12,6 +12,7 @@ import GoogleMap from '../components/GoogleMap';
 import RestaurantList from '../components/RestaurantList';
 import RestaurantDetail from '../components/RestaurantDetail';
 import AddBar from '../components/AddBar.vue';
+import axios from 'axios';
 
 export default {
 	name: 'home',
@@ -20,6 +21,12 @@ export default {
 		RestaurantList,
 		RestaurantDetail,
 		AddBar,
+	},
+	mounted: function() {
+		axios.get('/api/search2/?term=food&location=sacramento')
+			.then(res => {
+				console.log(res.data);
+			})
 	}
 }
 </script>
