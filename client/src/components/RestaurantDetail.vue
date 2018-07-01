@@ -12,7 +12,7 @@
 				<p>OPEN NOW: YES</p>
 				<p>SOMETHING ELSE</p>
 				<p>SOMETHING ELSE</p>
-				<a v-on:click="test" :href="restaurant.url" class="btn-text margin-top-sm">Open in Yelp &rarr;</a>
+				<a target="_blank" :href="restaurant.url" class="btn-text margin-top-sm">Open in Yelp &rarr;</a>
 				</div>
 			<div class="restaurant-detail__info-2">
 				<p>34 Bayshore Blvd</p>
@@ -38,11 +38,6 @@ export default {
 			restaurant: state => state.restaurant
 		}),
 		
-	},
-	methods: {
-		test () {
-			console.log(this.restaurant);
-		}
 	},
 }
 </script>

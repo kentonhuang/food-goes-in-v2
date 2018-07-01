@@ -4,16 +4,24 @@
 			<img :src="restaurant.image_url" alt="Restaurant List Image" class="restaurant-item__img--src">
 		</div>
 		<span class="restaurant-item__name">{{ restaurant.name }}</span>
-		<span class="restaurant-item__address">123 Bayshore Blvd, San Francisco CA, 94134</span>
-		<span class="restaurant-item__rating">{{ restaurant.rating }}</span>
-		<span class="restaurant-item__price">{{ restaurant.price }}</span>
+		<span class="restaurant-item__address"><p>{{ restaurant.location.display_address[0] }}</p><p>{{ restaurant.location.display_address[1] }}</p><p>{{ restaurant.location.display_address[2] }}</p></span>
+		<star-rating class="restaurant-item__rating" :read-only="true" :show-rating="false" :item-size="14" :increment="0.5" :rating="restaurant.rating"></star-rating>
+		<image-rating class="restaurant-item__price" :src="src" :spacing="-5" :max-rating="4" :read-only="true" :show-rating="false" :item-size="17" :rating="rating"></image-rating>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import { StarRating, ImageRating } from 'vue-rate-it';
+
 export default {
 	props: ['restaurant'],
+	data() {
+		return {
+			src: 'https://i.imgur.com/1xixcYO.png',
+			rating: this.restaurant.price.length,
+		}
+	},
 	computed: {
 		...mapState({
 			selected: state => state.selected
@@ -23,7 +31,18 @@ export default {
 		selectedRestaurant() {
 			this.$store.dispatch('setRestaurant', this.restaurant);
 		}
-	}
+	},
+	watch: {
+		selected() {
+			if(this.selected === this.restaurant.id) {
+				this.$store.dispatch('setOffset', this.$el.offsetTop);
+			}
+		}
+	},
+	components: {
+		StarRating,
+		ImageRating,
+	},
 }
 </script>
 
@@ -32,6 +51,7 @@ export default {
 			background-color: $color-grey-dark-4;
 		}
 	.restaurant-item {
+		position: relative;
 		cursor: pointer;
 		padding: 0.5rem;
 		
@@ -63,27 +83,24 @@ export default {
 
 		&__address {
 			grid-column: 7 / -1;
-			justify-self: end;
-			align-self: center;
+			justify-self: start;
+			align-self: start;
 			font-size: 1.3rem
 		}
 
 		&__rating {
 			grid-column: 3 / 4;
 			grid-row: 2 / 3;
-			font-size: 1.3rem;
 			justify-self: start;
 			align-self: end;
 			padding-left: 1rem;
-			padding-bottom: 1rem;
 		}
 
 		&__price {
 			grid-column: 4 / 5;
 			grid-row: 2 / 3;
-			font-size: 1.3rem;
+			padding-left: 1rem;
 			align-self: end;
-			padding-bottom: 1rem;
 		}
 
 		&::after {

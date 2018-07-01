@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
+import _ from 'lodash';
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
 			url: "#"
 		},
 		restaurantHistory: [],
-		selected: ''
+		selected: '',
+		itemOffset: 0,
   },
   mutations: {
 		updateForm (state, newFormData) {
@@ -30,28 +32,46 @@ export default new Vuex.Store({
 		},
 		setSelectedRestaurant (state, restaurant) {
 			state.selected = restaurant.id;
+		},
+		setOffset(state, offset) {
+			state.itemOffset = offset;
 		}
 	},
 	getters: {
 		restaurant: state => {
 			return state.restaurant;
+		},
+		itemOffset: state => {
+			return state.itemOffset;
+		},
+		selected: state => {
+			return state.selected;
 		}
 	},
   actions: {
 		getRestaurant ({ commit, state }) {	
-			axios.get('/api/search2/?term=food&location=sacramento')
+			const formData = state.formData;
+			axios.get(`/api/search2/?term=${formData.term}&location=${formData.location}`)
 				.then(res => {
 					const randID = Math.floor(Math.random() * Math.floor(res.data.businesses.length - 1));
 					const randRestaurant = res.data.businesses[randID];
 
-					commit('pushRestaurant', randRestaurant);
+					const exist = state.restaurantHistory.some(function(restaurant) {
+						return _.isEqual(restaurant.id, randRestaurant.id);
+					})
+					if(!exist) {
+						commit('pushRestaurant', randRestaurant);
+					}
 					commit('setRestaurant', randRestaurant);
 					commit('setSelectedRestaurant', randRestaurant);
 				})
 		},
-		setRestaurant ({ commit, state }, restaurant) {
+		setRestaurant ({ commit }, restaurant) {
 			commit('setRestaurant', restaurant);
 			commit('setSelectedRestaurant', restaurant);
+		},
+		setOffset({commit, state}, offset) {
+			commit('setOffset', offset);
 		}
   }
 })

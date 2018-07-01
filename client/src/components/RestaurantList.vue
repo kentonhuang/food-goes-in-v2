@@ -16,7 +16,13 @@
 			...mapState ({
 				restaurantHistory: state => state.restaurantHistory,
 				selected: state => state.selected,
-			})
+				itemOffset: state => state.itemOffset,
+			}),
+		},
+		watch: {
+			itemOffset() {
+				this.$el.scrollTop = this.itemOffset;
+			}
 		},
 		// watch: {
 		// 	selected() {
@@ -39,6 +45,7 @@
 		background-color: $color-grey-light-3;
 		grid-row: row-start 6 / row-end 10;
 		grid-column: col-start 1 / col-end 3;
+		position: relative;
 
 		display:grid;
 		grid-auto-rows: min-content;

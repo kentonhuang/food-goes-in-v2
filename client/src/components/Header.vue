@@ -8,7 +8,7 @@
 			<input v-model="formData.location" type="text" class="form__input" id="location" placeholder="address, city, state, or zip">
 			<button type="submit" v-on:click="findRestaurant">{{ headerButton }}</button>
 		</form>
-		<span class="right">{{ formData.term }} {{ formData.location }}</span>
+		<span class="right">About</span>
 	</header>
 </template>
 
@@ -18,7 +18,7 @@ import { mapState } from 'vuex';
 export default {
 	data() {
 		return {
-			headerButton: 'Find Restaurant',
+			headerButton: 'Search',
 		}
 	},
 	computed: {
@@ -66,8 +66,7 @@ export default {
 			border: none;
 			padding: 1rem 1rem;
 			font-size: 1.4rem;
-			flex: 1 0 30rem;
-			position: relative;
+			flex: 0 0 30rem;
 
 			&:focus {
 				outline: none;

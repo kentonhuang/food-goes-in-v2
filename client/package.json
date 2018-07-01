@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.16",
+    "vue-rate-it": "^2.1.0",
     "vue-router": "^3.0.1",
     "vue2-google-maps": "^0.9.7",
     "vuex": "^3.0.1"
