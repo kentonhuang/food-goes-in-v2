@@ -14,14 +14,5 @@ module.exports = {
 	  	}
 	  }
 	},
-	chainWebpack: config => {
-		config.module
-			.rule('pcss')
-			.use('postcss-loader')
-			.tap(options =>
-				merge(options, {
-					sourceMap: false,
-				})
-			)
-	}
+	
 }
