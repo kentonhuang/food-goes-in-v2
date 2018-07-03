@@ -11,7 +11,7 @@
     "server": "nodemon server/server.js",
     "client": "npm run serve --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-		"postinstall": "npm run build"
+		"postinstall": "npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
