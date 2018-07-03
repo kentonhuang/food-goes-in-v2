@@ -6,6 +6,11 @@ module.exports = {
 			}
 		}
 	},
+	loader: 'postcss-loader',
+		options: {
+			sourceMap: true,
+			plugins: function() { return []; }
+			},
 	devServer: {
 		proxy: {
 	  	'/api/*': {
@@ -13,7 +18,7 @@ module.exports = {
 				changeOrigin: true,
 	  	}
 	  }
-	}, 
+	},
 	chainWebpack: config => {
 		config.module.rules.delete("svg");
 	},
