@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 // app.use(express.static('client/build'))
 
 app.use(serveStatic(path.join(__dirname, 'client', 'dist')));
+app.use(serveStatic(path.join(__dirname, 'dist')));
 
 //const auth = 'Bearer '.concat(config.YELP_KEY);
 
