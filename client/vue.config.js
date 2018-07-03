@@ -6,11 +6,6 @@ module.exports = {
 			}
 		}
 	},
-	loader: 'postcss-loader',
-		options: {
-			sourceMap: true,
-			plugins: function() { return []; }
-			},
 	devServer: {
 		proxy: {
 	  	'/api/*': {
@@ -20,14 +15,13 @@ module.exports = {
 	  }
 	},
 	chainWebpack: config => {
-		config.module.rules.delete("svg");
-	},
-	configureWebpack: {
-		module: {
-			rules: [{
-				test: /\.svg$/,
-				loader: 'vue-svg-loader',
-			}, ],
-		}
+		config.module
+			.rule('pcss')
+			.use('postcss-loader')
+			.tap(options =>
+				merge(options, {
+					sourceMap: false,
+				})
+			)
 	}
 }
