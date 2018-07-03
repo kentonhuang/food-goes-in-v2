@@ -1,6 +1,9 @@
 {
-  "name": "yelp-project",
-  "version": "1.0.0",
+  "name": "food-goes-in-v2",
+	"version": "1.0.0",
+	"engines": {
+		"node": "9.9.0"
+	},
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -8,12 +11,15 @@
     "server": "nodemon server/server.js",
     "client": "npm run serve --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0",
+    "@fortawesome/vue-fontawesome": "^0.1.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",

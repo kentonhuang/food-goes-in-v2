@@ -26,6 +26,10 @@ $font-secondary: 'Josefin Sans', sans-serif;
 html {
 	box-sizing: border-box;
 	font-size: 62.5%; // 1rem = 10px
+
+	@media only screen and (max-width: 1200px) {
+		font-size: 50%;
+	}
 }
 
 body {
