@@ -18,7 +18,7 @@ console.log(path.join(__dirname, '../client', 'dist'));
 
 //const auth = 'Bearer '.concat(config.YELP_KEY);
 
-const client = yelp.client('kv2SXo2kqTdnhXCwQyrkmPUOdnYTvUTFjvpFoot22iy-XBVIvJ-oovs-YdY4FMZp3_UMAyY6bLT7CznFp6XB74VWGJ7-edkN1v-f3pDiMm3FuhogxaTvDOdKQdS2WnYx');
+const client = yelp.client(process.env.YELP_KEY);
 
 // axios.get('https://api.yelp.com/v3/businesses/search?term=food&latitude=37.786882&longitude=-122.399972', { headers: { Authorization: auth }})
 // 	.then(res => {
