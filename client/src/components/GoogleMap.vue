@@ -93,7 +93,8 @@ export default {
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        };
+				};
+				this.$store.dispatch('setLocation', this.center);
       });
     }
   }

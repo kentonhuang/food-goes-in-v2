@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+		currentLocation: '',
 		formData: {
 			term: '',
 			location: '',
@@ -35,6 +36,9 @@ export default new Vuex.Store({
 		},
 		setOffset(state, offset) {
 			state.itemOffset = offset;
+		},
+		setCurrentLocation(state, location) {
+			state.currentLocation = location;
 		}
 	},
 	getters: {
@@ -59,19 +63,31 @@ export default new Vuex.Store({
 					const exist = state.restaurantHistory.some(function(restaurant) {
 						return _.isEqual(restaurant.id, randRestaurant.id);
 					})
-					if(!exist) {
-						commit('pushRestaurant', randRestaurant);
-					}
-					commit('setRestaurant', randRestaurant);
-					commit('setSelectedRestaurant', randRestaurant);
+
+					axios.get(`/api/business/?id=${randRestaurant.id}`)
+						.then(res => {
+
+
+							if(!exist) {
+									randRestaurant.reviews = res.data.reviews;
+									commit('pushRestaurant', randRestaurant);
+								}		
+
+								commit('setRestaurant', randRestaurant);
+								commit('setSelectedRestaurant', randRestaurant);
+						})
+					
 				})
 		},
 		setRestaurant ({ commit }, restaurant) {
 			commit('setRestaurant', restaurant);
 			commit('setSelectedRestaurant', restaurant);
 		},
-		setOffset({commit, state}, offset) {
+		setOffset({ commit }, offset) {
 			commit('setOffset', offset);
+		},
+		setLocation({ commit }, location) {
+			commit('setCurrentLocation', location);
 		}
   }
 })

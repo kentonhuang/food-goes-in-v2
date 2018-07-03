@@ -64,6 +64,14 @@ app.get('/api/search2', (req, res) => {
 
 })
 
+app.get('/api/business', (req, res) => {
+	let id = req.query.id
+
+	client.reviews(id).then(response => {
+		res.json(response.jsonBody);
+	})
+})
+
 if(process.env.NODE_ENV === 'production'){
     const path = require('path');
     app.get('/*',(req,res)=>{

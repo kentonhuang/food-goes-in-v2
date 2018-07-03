@@ -6,6 +6,7 @@ $color-grey-dark-1: #444444;
 $color-grey-dark-2: #252525;
 $color-grey-dark-3: #353535;
 $color-grey-dark-4: #c2c2c2;
+$color-grey-dark-5: #646464;
 $color-grey-light-1: #d5d5d3;
 $color-grey-light-3: #eeeeee;
 $color-grey-light-2: #faf9f9;
@@ -36,4 +37,14 @@ body {
 
 .margin-top-sm {
 	margin-top: 1.5rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	-webkit-box-shadow: 0 0 0px 1000px #fff inset;
 }

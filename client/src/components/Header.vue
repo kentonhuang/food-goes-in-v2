@@ -5,8 +5,8 @@
 			<label for="find" class="form__input__label"><span class="form__input__label--text">Find:</span></label>
 			<input v-model="formData.term" type="text" class="form__input form__input--find" id="find" placeholder="food, Chinese, Tacos...">
 			<label for="find" class="form__input__label"><span class="form__input__label--text">Near:</span></label>
-			<input v-model="formData.location" type="text" class="form__input" id="location" placeholder="address, city, state, or zip">
-			<button type="submit" v-on:click="findRestaurant">{{ headerButton }}</button>
+			<input v-model="formData.location" type="text" :class="[this.formData.location.toLowerCase() === 'current location' ? 'location' : '']" class="form__input" id="location" placeholder="address, city, state, or zip">
+			<button class="form__button" type="submit" v-on:click="findRestaurant"><img class="form__button--image" src="../assets/search.png" alt="button image"></button>
 		</form>
 		<span class="right">About</span>
 	</header>
@@ -19,6 +19,7 @@ export default {
 	data() {
 		return {
 			headerButton: 'Search',
+			
 		}
 	},
 	computed: {
@@ -84,18 +85,26 @@ export default {
 					font-weight: 700;
 				}
 			}
-
 		}
 
+		&__button {
+				position: absolute;
+				right: -13rem;
+				border: none;
+				background-color: $color-primary;
+				height: 100%;
+				z-index: 5;
+				width: 5rem;
 
-		button {
-			position: absolute;
-			right: -13rem;
-			border: none;
-			background-color: $color-primary;
-			height: 100%;
-			z-index: 5;
-		}
-		
+				&--image {
+					height: 90%;
+					width: 60%;
+					padding: 4px;
+				}
+			}
+	}
+
+	.location {
+		color: $color-primary;
 	}
 </style>

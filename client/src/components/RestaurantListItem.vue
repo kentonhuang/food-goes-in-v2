@@ -3,7 +3,10 @@
 		<div class="restaurant-item__img">
 			<img :src="restaurant.image_url" alt="Restaurant List Image" class="restaurant-item__img--src">
 		</div>
-		<span class="restaurant-item__name">{{ restaurant.name }}</span>
+		<span class="restaurant-item__name">
+			<p>{{ restaurant.name }}</p>
+			<p class="restaurant-item__name--categories">{{ categories }}</p>
+		</span>
 		<span class="restaurant-item__address"><p>{{ restaurant.location.display_address[0] }}</p><p>{{ restaurant.location.display_address[1] }}</p><p>{{ restaurant.location.display_address[2] }}</p></span>
 		<star-rating class="restaurant-item__rating" :read-only="true" :show-rating="false" :item-size="14" :increment="0.5" :rating="restaurant.rating"></star-rating>
 		<image-rating class="restaurant-item__price" :src="src" :spacing="-5" :max-rating="4" :read-only="true" :show-rating="false" :item-size="17" :rating="rating"></image-rating>
@@ -20,6 +23,7 @@ export default {
 		return {
 			src: 'https://i.imgur.com/1xixcYO.png',
 			rating: this.restaurant.price.length,
+			categories: this.restaurant.categories.map(category => category.title).join(', ')
 		}
 	},
 	computed: {
@@ -73,13 +77,20 @@ export default {
 
 		&__name {
 			grid-column: 3 / 7;
+			grid-row: 1 / 2;
 			justify-self: start;
 			align-self: start;
 			font-size: 1.6rem;
 			font-weight: 700;
 			padding-left: 1rem;
 			text-align: left;
+
+			&--categories {
+				color: $color-grey-dark-5;
+				font-size: 1rem;
+			}
 		}
+
 
 		&__address {
 			grid-column: 7 / -1;
