@@ -3,12 +3,16 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const yelp = require('yelp-fusion')
 const config = require('./config/config').get(process.env.NODE_ENV);
+const serveStatic = require("serve-static");
+const path = require('path');
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.use(express.static('client/build'))
+// app.use(express.static('client/build'))
+
+app.use(serveStatic(path.join(__dirname, 'client/dist')));
 
 //const auth = 'Bearer '.concat(config.YELP_KEY);
 
@@ -72,12 +76,13 @@ app.get('/api/business', (req, res) => {
 	})
 })
 
-if(process.env.NODE_ENV === 'production'){
-    const path = require('path');
-    app.get('/*',(req,res)=>{
-        res.sendfile(path.resolve(__dirname,'../client','dist','index.html'))
-    })
-}
+// if(process.env.NODE_ENV === 'production'){
+//     const path = require('path');
+//     app.get('/*',(req,res)=>{
+//         res.sendfile(path.resolve(__dirname,'../client','dist','index.html'))
+//     })
+// }
+
 
 
 const port = process.env.PORT || 3001;

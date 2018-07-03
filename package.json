@@ -1,9 +1,9 @@
 {
   "name": "food-goes-in-v2",
-	"version": "1.0.0",
-	"engines": {
-		"node": "9.9.0"
-	},
+  "version": "1.0.0",
+  "engines": {
+    "node": "9.9.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
     "server": "nodemon server/server.js",
     "client": "npm run serve --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-		"postinstall": "npm run build --prefix client"
+    "postinstall": "npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
@@ -25,11 +25,19 @@
     "concurrently": "^3.5.1",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
-    "yelp-fusion": "^2.0.3"
+    "yelp-fusion": "^2.0.3",
+    "vue": "^2.5.16",
+    "vue-rate-it": "^2.1.0",
+    "vue-router": "^3.0.1",
+    "vue2-google-maps": "^0.9.7",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-		"vue-svg-loader": "^0.5.0",
-		"@vue/cli-service": "^3.0.0-beta.15",
-		"@vue/cli-plugin-babel": "^3.0.0-beta.15"
+    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
+    "@vue/cli-service": "^3.0.0-beta.15",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "serve-static": "^1.13.2",
+    "vue-svg-loader": "^0.5.0"
   }
 }
