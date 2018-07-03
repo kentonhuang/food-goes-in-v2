@@ -3,10 +3,10 @@
 		<span class="logo">foodgoes.in</span>
 		<form class="form">
 			<label for="find" class="form__input__label"><span class="form__input__label--text">Find:</span></label>
-			<input v-model="formData.term" type="text" class="form__input form__input--find" id="find" placeholder="food, Chinese, Tacos...">
+			<input required v-model="formData.term" type="text" class="form__input form__input--find" id="find" placeholder="food, Chinese, Tacos...">
 			<label for="find" class="form__input__label"><span class="form__input__label--text">Near:</span></label>
-			<input v-model="formData.location" type="text" :class="[this.formData.location.toLowerCase() === 'current location' ? 'location' : '']" class="form__input" id="location" placeholder="address, city, state, or zip">
-			<button class="form__button" type="submit" v-on:click="findRestaurant"><img class="form__button--image" src="../assets/search.png" alt="button image"></button>
+			<input required v-model="formData.location" type="text" :class="[this.formData.location.toLowerCase() === 'current location' ? 'location' : '']" class="form__input" id="location" placeholder="address, city, state, or zip">
+			<button :disabled="this.loading" class="form__button" type="submit" v-on:click="findRestaurant"><img v-if="!this.loading" class="form__button--image" src="../assets/search.png" alt="button image"><pulse-loader v-else :size="size" :color="color"/></button>
 		</form>
 		<span class="right">About</span>
 	</header>
@@ -14,17 +14,19 @@
 
 <script>
 import { mapState } from 'vuex';
+import PulseLoader from 'vue-spinner/src/PulseLoader';
 
 export default {
 	data() {
 		return {
-			headerButton: 'Search',
-			
+			size: '10px',
+			color: "#101d2c"
 		}
 	},
 	computed: {
 		...mapState({
-			formData: state => state.formData
+			formData: state => state.formData,
+			loading: state => state.loading
 		})
 	},
 	methods: {
@@ -33,8 +35,12 @@ export default {
 		},
 		findRestaurant(e) {
 			e.preventDefault();
+			this.$store.dispatch('setLoad', !this.loading);
 			this.$store.dispatch('getRestaurant');
 		}
+	},
+	components: {
+		PulseLoader,
 	}
 }
 </script>

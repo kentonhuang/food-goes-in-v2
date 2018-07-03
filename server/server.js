@@ -52,7 +52,13 @@ app.get('/api/search', (req, res) => {
 
 app.get('/api/search2', (req, res) => {
 	let term = req.query.term;
+	if (term === '') {
+		term = 'food';
+	}
 	let location = req.query.location
+	if (location === '') {
+		location = "san francisco";
+	}
 	//let price = req.query.price;
 	//let open_now = req.query.open_now;
 	//let distance = req.query.distance;
@@ -66,6 +72,9 @@ app.get('/api/search2', (req, res) => {
 		//radius: distance,
 	}).then(response => {
 		res.json(response.jsonBody);
+	})
+	.catch(e => {
+		res.json(e.response);
 	})
 
 })

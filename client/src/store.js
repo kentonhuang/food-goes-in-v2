@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+		loading: false,
 		currentLocation: '',
 		formData: {
 			term: '',
@@ -39,6 +40,9 @@ export default new Vuex.Store({
 		},
 		setCurrentLocation(state, location) {
 			state.currentLocation = location;
+		},
+		setLoading(state, loading) {
+			state.loading = loading;
 		}
 	},
 	getters: {
@@ -57,26 +61,31 @@ export default new Vuex.Store({
 			const formData = state.formData;
 			axios.get(`/api/search2/?term=${formData.term}&location=${formData.location}`)
 				.then(res => {
-					const randID = Math.floor(Math.random() * Math.floor(res.data.businesses.length - 1));
-					const randRestaurant = res.data.businesses[randID];
+					if(res.data.businesses) {
+						const randID = Math.floor(Math.random() * Math.floor(res.data.businesses.length - 1));
+						const randRestaurant = res.data.businesses[randID];
 
-					const exist = state.restaurantHistory.some(function(restaurant) {
-						return _.isEqual(restaurant.id, randRestaurant.id);
-					})
+						const exist = state.restaurantHistory.some(function (restaurant) {
+							return _.isEqual(restaurant.id, randRestaurant.id);
+						})
 
-					axios.get(`/api/business/?id=${randRestaurant.id}`)
-						.then(res => {
+						axios.get(`/api/business/?id=${randRestaurant.id}`)
+							.then(res => {
 
 
-							if(!exist) {
+								if (!exist) {
 									randRestaurant.reviews = res.data.reviews;
 									commit('pushRestaurant', randRestaurant);
-								}		
+								}
 
 								commit('setRestaurant', randRestaurant);
 								commit('setSelectedRestaurant', randRestaurant);
-						})
-					
+								commit('setLoading', !state.loading);
+							})
+					}
+						else {
+							commit('setLoading', !state.loading);
+						}
 				})
 		},
 		setRestaurant ({ commit }, restaurant) {
@@ -88,6 +97,9 @@ export default new Vuex.Store({
 		},
 		setLocation({ commit }, location) {
 			commit('setCurrentLocation', location);
+		},
+		setLoad({ commit }, loading) {
+			commit('setLoading', loading);
 		}
   }
 })
