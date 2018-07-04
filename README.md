@@ -13,5 +13,5 @@ Multiple API support (Google Places, Zomato, etc)\
 Geolocation monitoring\
 Migrate to GraphQL?\
 Implement testing\
-Additional Filters\
+Additional Filters
 
