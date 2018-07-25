@@ -4,7 +4,7 @@ Random restaurant/business generator for the indecisive folks. Built with Vue an
 Authored by Kenton Huang
 
 ## LIVE DEMO
-https://food-goes-in-v2.herokuapp.com/
+https://food-goes-in-v2.herokuapp.com/ || https://food-goes.in
 
 ### TODO
 Improve Componentization\
